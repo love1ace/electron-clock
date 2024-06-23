@@ -1,6 +1,6 @@
 # Electron Clock
 
-![image]()
+![image](https://github.com/love1ace/electron-clock/assets/147500032/6a1427fd-f1f7-4d97-8cf8-9687cc21e3ea")
 
 # How to Use
 
