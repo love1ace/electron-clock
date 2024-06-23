@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Clock</title>
+    <style>
+        body {
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            height: 100vh;
+        }
+
+        #clock {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div id="clock"></div>
+<script>
+    const {ipcRenderer} = require('electron');
+
+    let initialWidth;
+
+    ipcRenderer.on('initial-width', (event, width) => {
+        initialWidth = width;
+        updateClock();
+    });
+
+    function updateClock() {
+        const now = new Date();
+        const hours = now.getHours() % 24;
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+
+        const clockElement = document.getElementById('clock');
+
+        if (clockElement) {
+            clockElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            clockElement.style.fontSize = `${Math.max(10, initialWidth / 5)}px`;
+        }
+    }
+
+    setInterval(updateClock, 1000);
+</script>
+</body>
+</html>
